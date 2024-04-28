@@ -1,6 +1,12 @@
 ## Point Of Sale (POS)
-POS သည် ကုန်ပစ္စည်းအရောင်းတွေအတွတ်ဖန်တီးထားသော website တစ်ခုဖြစ်ပါသည်။ 
-ကျွန်တော်တို့POSအတွတ်လိုအပ်တဲ့Tableလေးတွေတည်ဆောတ်ထားပါတယ်။ Product, ProductCategory, Shop, Staff, SaleInvoice, SaleInvoiceDetail.
+POS သည် ကုန်ပစ္စည်းအရောင်းတွေ အတွတ် ဖန်တီးထားသော website တစ်ခုဖြစ်ပါသည်။ 
+ကျွန်တော်တို့ POSအတွတ် လိုအပ်တဲ့ Tableလေးတွေ တည်ဆောတ်ထားပါတယ်။ 
+1. Product
+2. ProductCategory
+3. Shop
+4. Staff
+5. SaleInvoice
+6. SaleInvoiceDetail
 
 ## Product
 Product Table ကိုကျွန်တော်တို့ကုန်ပစ္စည်းရဲ့ Code, အမည်၊ အမျိုးအစား၊စျေးနှုန်းတွေကိုသိမ်းဖို့တည်ဆောတ်ထားပါတယ်။
