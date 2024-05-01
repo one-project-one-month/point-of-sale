@@ -3,11 +3,11 @@
 ကျွန်တော်တို့က ဒီ Project အတွက် လိုအပ်တဲ့ Tableလေးတွေ တည်ဆောတ်ထားတယ်။ ကိုယ်လိုအပ်သလို ထပ်ကွန့်ပြီး ချဲ့လို့ရပါတယ်။ ဒီ Project က တစ်လအတွင်း လုပ်ရတာဖြစ်တဲ့အတွက်
 အမြန် အသုံးပြုလို့ရမယ့် Table တွေပဲ အရင် ထုတ်ထားပါတယ်။
 1. [Product](#product)
-2. ProductCategory
+2. [Product Category](#product-category)
 3. Shop
 4. Staff
-5. SaleInvoice
-6. SaleInvoiceDetail
+5. Sale Invoice
+6. Sale Invoice Detail
 
 ## Product
 Product Table ကိုကျွန်တော်တို့ကုန်ပစ္စည်းရဲ့ Code, အမည်၊ အမျိုးအစား၊စျေးနှုန်းတွေကိုသိမ်းဖို့တည်ဆောတ်ထားပါတယ်။
@@ -19,7 +19,7 @@ Product Table ကိုကျွန်တော်တို့ကုန်ပစ
 [Price] [decimal](18, 2) NOT NULL
 ```
 
-## Category
+## Product Category
 Category Table ကို ကျွန်တော်တို့ ကုန်ပစ္စည်းရဲ့အမျိုးအစားတွေကိုသိမ်းဖို့တည်ဆောတ်ထားပါတယ်။
 
 ## Shop
