@@ -11,6 +11,13 @@
 
 ## Product
 Product Table ကိုကျွန်တော်တို့ကုန်ပစ္စည်းရဲ့ Code, အမည်၊ အမျိုးအစား၊စျေးနှုန်းတွေကိုသိမ်းဖို့တည်ဆောတ်ထားပါတယ်။
+```sql
+[ProductId] [int] IDENTITY(1,1) NOT NULL
+[ProductCode] [nvarchar](50) NOT NULL
+[ProductCategoryCode] [nvarchar](50) NOT NULL
+[ProductName] [nvarchar](50) NOT NULL
+[Price] [decimal](18, 2) NOT NULL
+```
 
 ## Category
 Category Table ကို ကျွန်တော်တို့ ကုန်ပစ္စည်းရဲ့အမျိုးအစားတွေကိုသိမ်းဖို့တည်ဆောတ်ထားပါတယ်။
