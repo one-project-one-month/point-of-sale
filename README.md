@@ -40,15 +40,15 @@ Shop Table ကို ကျွန်တော်တို့ websiteကိုသ
 ## Staff
 Staff Table ကိုကျွန်တော်တို့website ကိုသုံးနေတဲ့ ဝန်ထမ်းတွေရဲ့ code ၊အမည် ၊မွေးနေ့၊လိပ်စာအပြည့်အစုံ၊Gender ၊ ရာထူး ၊ password တွေကိုသိမ်းဖ်ို့အတွတ်တည်ဆောတ်ထားပါတယ်။
 ```sql
-  [StaffId] [int] IDENTITY(1,1) NOT NULL
-	[StaffCode] [varchar](50) NOT NULL
-	[StaffName] [varchar](50) NOT NULL
-	[DateOfBirth] [datetime] NOT NULL
-	[MobileNo] [varchar](50) NOT NULL
-	[Address] [varchar](50) NOT NULL
-	[Gender] [varchar](50) NOT NULL
-	[Position] [varchar](50) NOT NULL
-	[Password] [varchar](50) NOT NULL
+[StaffId] [int] IDENTITY(1,1) NOT NULL
+[StaffCode] [varchar](50) NOT NULL
+[StaffName] [varchar](50) NOT NULL
+[DateOfBirth] [datetime] NOT NULL
+[MobileNo] [varchar](50) NOT NULL
+[Address] [varchar](50) NOT NULL
+[Gender] [varchar](50) NOT NULL
+[Position] [varchar](50) NOT NULL
+[Password] [varchar](50) NOT NULL
 ```
 
 ## Sale Invoice
