@@ -13,7 +13,7 @@ Backend
 - [Next.js](https://github.com/sannlynnhtun-coding/pos_frontend_next)
 - [C#](https://github.com/sannlynnhtun-coding/pos_backend_csharp)
 
-ကျွန်တော်တို့က ဒီ Project အတွက် လိုအပ်တဲ့ Tableလေးတွေ တည်ဆောတ်ထားတယ်။ ကိုယ်လိုအပ်သလို ထပ်ကွန့်ပြီး ချဲ့လို့ရပါတယ်။ ဒီ Project က တစ်လအတွင်း လုပ်ရတာဖြစ်တဲ့အတွက်
+ကျွန်တော်တို့က ဒီ Project အတွက် လိုအပ်တဲ့ Tableလေးတွေ တည်ဆောက်ထားတယ်။ ကိုယ်လိုအပ်သလို ထပ်ကွန့်ပြီး ချဲ့လို့ရပါတယ်။ ဒီ Project က တစ်လအတွင်း လုပ်ရတာဖြစ်တဲ့အတွက်
 အမြန် အသုံးပြုလို့ရမယ့် Table တွေပဲ အရင် ထုတ်ထားပါတယ်။
 1. [Product](#product)
 2. [Product Category](#product-category)
