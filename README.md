@@ -1,6 +1,18 @@
 ## Point Of Sale (POS)
 > ဒီ Project က ကုန်ပစ္စည်း ရောင်းဖို့ အတွက် ဖန်တီးထားတဲ့ Idea တစ်ခု ဖြစ်ပါတယ်။
 
+Frontend
+- [Flutter](https://github.com/sannlynnhtun-coding/pos_frontend_flutter)
+- [Next.js](https://github.com/sannlynnhtun-coding/pos_frontend_next)
+- [React.js with TypeScript](https://github.com/sannlynnhtun-coding/pos_frontend_react_ts)
+- [React.js](https://github.com/sannlynnhtun-coding/pos_frontend_react)
+- [Vue.js](https://github.com/sannlynnhtun-coding/pos_frontend_vue)
+
+Backend
+- [Laravel](https://github.com/sannlynnhtun-coding/pos_backend_laravel)
+- [Next.js](https://github.com/sannlynnhtun-coding/pos_frontend_next)
+- [C#](https://github.com/sannlynnhtun-coding/pos_backend_csharp)
+
 ကျွန်တော်တို့က ဒီ Project အတွက် လိုအပ်တဲ့ Tableလေးတွေ တည်ဆောတ်ထားတယ်။ ကိုယ်လိုအပ်သလို ထပ်ကွန့်ပြီး ချဲ့လို့ရပါတယ်။ ဒီ Project က တစ်လအတွင်း လုပ်ရတာဖြစ်တဲ့အတွက်
 အမြန် အသုံးပြုလို့ရမယ့် Table တွေပဲ အရင် ထုတ်ထားပါတယ်။
 1. [Product](#product)
