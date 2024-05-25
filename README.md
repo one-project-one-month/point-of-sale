@@ -96,7 +96,6 @@ SaleInvoiceDetail Table ကိုကျွန်တော်တို့ ရေ�
 ## Store Procedure for Dashboard
 ```sql
 
-
 /****** Object:  StoredProcedure [dbo].[sp_Dashboard]    Script Date: 5/24/2024 9:42:18 PM ******/
 DROP PROCEDURE [dbo].[sp_Dashboard]
 GO
@@ -108,23 +107,14 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-
-
-
-
-
 ---------------------------------------------------------------------------------------------------------------
 -- Test Script
 ---------------------------------------------------------------------------------------------------------------
 /*
-
 DECLARE @SaleInvoiceDate		 DATETIME		SET @SaleInvoiceDate =GETDATE()
 
 EXEC sp_Dashboard				@SaleInvoiceDate
-
 */
-
 ---------------------------------------------------------------------------------------------------------------
 -- Change History
 ---------------------------------------------------------------------------------------------------------------
@@ -135,10 +125,8 @@ CREATE PROCEDURE [dbo].[sp_Dashboard]
 ( 
 	@SaleInvoiceDate   DATETIME
 )
- 
 AS
 BEGIN 
-
 	---------------------------------------------------------------------------------------------------------------	
 	-- Prepare a temp table for dashboard
 	---------------------------------------------------------------------------------------------------------------
@@ -170,7 +158,7 @@ BEGIN
 	END
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve the Dataset #2 (DailySalesReport)
-    ------------------------------------------------------------------------------------------------------------------
+    	------------------------------------------------------------------------------------------------------------------
 	INSERT INTO #DailySalesReport(SaleInvoiceDate, Quantity, Amount)
 	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, ISNULL(SID.Quantity,0), ISNULL(SID.Amount,0) from Tbl_SaleInvoice (NOLOCK) AS SI 
 											INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
@@ -182,7 +170,8 @@ BEGIN
 	INSERT INTO #WeeklySalesReport(SaleInvoiceDate, Quantity, Amount)
 	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Quantity,0)), SUM(ISNULL(SID.Amount,0)) from Tbl_SaleInvoice AS SI 
 											INNER JOIN Tbl_SaleInvoiceDetail AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,DATEADD(day, -7, @SaleInvoiceDate)) AND CONVERT(DATE,@SaleInvoiceDate) GROUP BY SI.SaleInvoiceDateTime
+											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,DATEADD(day, -7, @SaleInvoiceDate))
+											AND CONVERT(DATE,@SaleInvoiceDate) GROUP BY SI.SaleInvoiceDateTime
 
 	---------------------------------------------------------------------------------------------------------------	
 	-- Retrieve the Dataset #4 (MonthlySalesReport)
@@ -193,7 +182,8 @@ BEGIN
 	INSERT INTO #MonthlySalesReport(SaleInvoiceDate, Amount)
 	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Amount,0)) from Tbl_SaleInvoice (NOLOCK) AS SI 
 											INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,@StartDate) AND CONVERT(DATE,@EndDate) GROUP BY CONVERT(DATE,SaleInvoiceDateTime)
+											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,@StartDate) AND CONVERT(DATE,@EndDate)
+											GROUP BY CONVERT(DATE,SaleInvoiceDateTime)
 	---------------------------------------------------------------------------------------------------------------	
 	-- Retrieve the Dataset #5 (YearlySalesReport)
 	---------------------------------------------------------------------------------------------------------------
@@ -207,23 +197,23 @@ BEGIN
 	------------------------------------------------------------------------------------------------------------------
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #1  (the best seller top ten Product)
-    ------------------------------------------------------------------------------------------------------------------
-	SELECT TOP 10 P.ProductName, SUM(ISNULL(SD.Quantity,0)) AS TotalQty FROM Tbl_SaleInvoiceDetail AS SD INNER JOIN Tbl_Product AS P ON P.ProductCode = SD.ProductCode  GROUP BY SD.ProductCode,P.ProductName ORDER BY SUM(SD.Quantity) DESC
+    	------------------------------------------------------------------------------------------------------------------
+	SELECT TOP 10 P.ProductName, SUM(ISNULL(SD.Quantity,0)) AS TotalQty FROM Tbl_SaleInvoiceDetail AS SD INNER JOIN Tbl_Product AS P ON P.ProductCode = SD.ProductCode  GROUP BY SD.ProductCode,P.ProductName 	ORDER BY SUM(SD.Quantity) DESC
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #2  (DailySalesReport)
-    ------------------------------------------------------------------------------------------------------------------
+   	------------------------------------------------------------------------------------------------------------------
 	SELECT SaleInvoiceDate,Amount FROM #DailySalesReport ORDER BY SaleInvoiceDate
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #3  (WeeklySalesReport)
-    ------------------------------------------------------------------------------------------------------------------
+    	------------------------------------------------------------------------------------------------------------------
 	SELECT SaleInvoiceDate,Amount FROM #WeeklySalesReport ORDER BY SaleInvoiceDate
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #4  (MonthlySalesReport)
-    ------------------------------------------------------------------------------------------------------------------
+    	------------------------------------------------------------------------------------------------------------------
 	SELECT SaleInvoiceDate,Amount FROM #MonthlySalesReport ORDER BY SaleInvoiceDate
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #5  (YearlySalesReport)
-    ------------------------------------------------------------------------------------------------------------------
+    	------------------------------------------------------------------------------------------------------------------
 	SELECT YEAR,Amount FROM #YearlySalesReport
 	-------------------------------------------
 	-- Remove Temp table
@@ -232,10 +222,6 @@ BEGIN
 	DROP TABLE #WeeklySalesReport
 	DROP TABLE #MonthlySalesReport
 	DROP TABLE #YearlySalesReport
-	
-
 END
-
-
 GO
 ```
