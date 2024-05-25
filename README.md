@@ -160,18 +160,22 @@ BEGIN
 	-- Retrieve the Dataset #2 (DailySalesReport)
     	------------------------------------------------------------------------------------------------------------------
 	INSERT INTO #DailySalesReport(SaleInvoiceDate, Quantity, Amount)
-	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, ISNULL(SID.Quantity,0), ISNULL(SID.Amount,0) from Tbl_SaleInvoice (NOLOCK) AS SI 
-											INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE CONVERT(DATE,SaleInvoiceDateTime) = CONVERT(DATE,@SaleInvoiceDate)
+	SELECT
+		CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, ISNULL(SID.Quantity,0),ISNULL(SID.Amount,0)
+			FROM Tbl_SaleInvoice (NOLOCK) AS SI 
+			INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
+			WHERE CONVERT(DATE,SaleInvoiceDateTime) = CONVERT(DATE,@SaleInvoiceDate)
 	---------------------------------------------------------------------------------------------------------------	
 	-- Retrieve the Dataset #3 (WeeklySalesReport)
 	---------------------------------------------------------------------------------------------------------------
 
 	INSERT INTO #WeeklySalesReport(SaleInvoiceDate, Quantity, Amount)
-	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Quantity,0)), SUM(ISNULL(SID.Amount,0)) from Tbl_SaleInvoice AS SI 
-											INNER JOIN Tbl_SaleInvoiceDetail AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,DATEADD(day, -7, @SaleInvoiceDate))
-											AND CONVERT(DATE,@SaleInvoiceDate) GROUP BY SI.SaleInvoiceDateTime
+	SELECT
+		CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Quantity,0)), SUM(ISNULL(SID.Amount,0))
+			FROM Tbl_SaleInvoice AS SI 
+			INNER JOIN Tbl_SaleInvoiceDetail AS SID ON SID.VoucherNo = SI.VoucherNo 
+			WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,DATEADD(day, -7, @SaleInvoiceDate))
+			AND CONVERT(DATE,@SaleInvoiceDate) GROUP BY SI.SaleInvoiceDateTime
 
 	---------------------------------------------------------------------------------------------------------------	
 	-- Retrieve the Dataset #4 (MonthlySalesReport)
@@ -180,25 +184,32 @@ BEGIN
 	DECLARE @EndDate DATE SET @EndDate = DATEADD(SECOND, -1, DATEADD(MONTH, 1, DATEADD(MONTH, DATEDIFF(MONTH, 0, @SaleInvoiceDate), 0)))
 
 	INSERT INTO #MonthlySalesReport(SaleInvoiceDate, Amount)
-	SELECT CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Amount,0)) from Tbl_SaleInvoice (NOLOCK) AS SI 
-											INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,@StartDate) AND CONVERT(DATE,@EndDate)
-											GROUP BY CONVERT(DATE,SaleInvoiceDateTime)
+	SELECT
+		CONVERT(DATE,SI.SaleInvoiceDateTime) AS SaleInvoiceDate, SUM(ISNULL(SID.Amount,0))
+			FROM Tbl_SaleInvoice (NOLOCK) AS SI 
+			INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
+			WHERE CONVERT(DATE,SaleInvoiceDateTime) BETWEEN CONVERT(DATE,@StartDate) AND CONVERT(DATE,@EndDate)
+			GROUP BY CONVERT(DATE,SaleInvoiceDateTime)
 	---------------------------------------------------------------------------------------------------------------	
 	-- Retrieve the Dataset #5 (YearlySalesReport)
 	---------------------------------------------------------------------------------------------------------------
 
 	INSERT INTO #YearlySalesReport(YEAR, Amount)
-	SELECT YEAR(SaleInvoiceDateTime), SUM(ISNULL(SID.Amount,0)) from Tbl_SaleInvoice (NOLOCK) AS SI 
-											INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
-											WHERE YEAR(SaleInvoiceDateTime) = YEAR(@SaleInvoiceDate) GROUP BY YEAR(SaleInvoiceDateTime)
+	SELECT
+		YEAR(SaleInvoiceDateTime), SUM(ISNULL(SID.Amount,0))
+			FROM Tbl_SaleInvoice (NOLOCK) AS SI
+			INNER JOIN Tbl_SaleInvoiceDetail (NOLOCK) AS SID ON SID.VoucherNo = SI.VoucherNo 
+			WHERE YEAR(SaleInvoiceDateTime) = YEAR(@SaleInvoiceDate) GROUP BY YEAR(SaleInvoiceDateTime)
 	------------------------------------------------------------------------------------------------------------------
 	-- Return DataSet
 	------------------------------------------------------------------------------------------------------------------
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #1  (the best seller top ten Product)
     	------------------------------------------------------------------------------------------------------------------
-	SELECT TOP 10 P.ProductName, SUM(ISNULL(SD.Quantity,0)) AS TotalQty FROM Tbl_SaleInvoiceDetail AS SD INNER JOIN Tbl_Product AS P ON P.ProductCode = SD.ProductCode  GROUP BY SD.ProductCode,P.ProductName 	ORDER BY SUM(SD.Quantity) DESC
+	SELECT TOP 10 P.ProductName, SUM(ISNULL(SD.Quantity,0)) AS TotalQty
+		FROM Tbl_SaleInvoiceDetail AS SD
+		INNER JOIN Tbl_Product AS P ON P.ProductCode = SD.ProductCode
+		GROUP BY SD.ProductCode,P.ProductName 	ORDER BY SUM(SD.Quantity) DESC
 	------------------------------------------------------------------------------------------------------------------
 	-- Retrieve  Dataset #2  (DailySalesReport)
    	------------------------------------------------------------------------------------------------------------------
